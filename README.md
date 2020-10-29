@@ -49,3 +49,4 @@ The input will consist of lines of text containing random digits. You are expect
 
 ## Design Choices
 ### Programming language
+For this problem, optimised performance is likely *not* a critical factor. The main difficulty arises from parsing text and converting this parsed text into a different output. For this problem, `Python` is particularly well suited and this is the programming language I have chosen to use. If better performance is desired, it would be possible to parallelise certain elements within the application where performance bottlenecks present themselves.
