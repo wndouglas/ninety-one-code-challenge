@@ -28,7 +28,7 @@ The input will consist of lines of text containing random digits. You are expect
 | I received 23 456,9 KGs.                            | number invalid                                                                                      |
  
 ### Notes
-* Ideally `R`, `Python` or `C` but open to other languages
+* Ideally R, Python or C but open to other languages
 * Application should include a way to input data via a plain-text file
 * Application must be able to run with the output directed to `STDOUT`
 * Application should output correct values for inputs *other* than those specified above
@@ -49,4 +49,4 @@ The input will consist of lines of text containing random digits. You are expect
 
 ## Design Choices
 ### Programming language
-For this problem, optimised performance is likely *not* a critical factor. The main difficulty arises from parsing text and converting this parsed text into a different output. For this problem, `Python` is particularly well suited and this is the programming language I have chosen to use. If better performance is desired, it would be possible to parallelise certain elements within the application where performance bottlenecks present themselves.
+For this problem, optimised performance is likely *not* a critical factor. The main difficulty arises from parsing text and converting this parsed text into a different output. For this problem, **Python** is particularly well suited and this is the programming language I have chosen to use. If better performance is desired, it would be possible to parallelise certain elements within the application where performance bottlenecks present themselves.
