@@ -1,5 +1,16 @@
 <h1 align="center"> Ninety One Coding Challenge </h1>
 
+<!-- content -->
+
+## Table of Contents
+- [Problem Specification](#Problem-Specification)
+  - [Problem](#Problem)
+  - [Test cases](#Test-cases)
+  - [Notes](#Notes)
+  - [Evaluation criteria](#Evaluation-criteria)
+- [Design Choices](#Design-Choices)
+  - [Programming Language](#programming-language)
+
 ## Probem Specification
 ### Problem
 Write a function that converts a given number into words. For example, given the number "1234" as input, return the output "one thousand, two hundred and thirty-four".
@@ -35,3 +46,6 @@ The input will consist of lines of text containing random digits. You are expect
     * evolve
 
 ---
+
+## Design Choices
+### Programming language
