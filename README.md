@@ -11,7 +11,7 @@
 - [Design Choices](#Design-Choices)
   - [Programming Language](#programming-language)
 
-## Probem Specification
+## Problem Specification
 ### Problem
 Write a function that converts a given number into words. For example, given the number "1234" as input, return the output "one thousand, two hundred and thirty-four".
 
