@@ -1,6 +1,6 @@
+import os
 import json
 import logging.config
-import os
 
 from num_conv.engine import run
 
@@ -20,8 +20,9 @@ def setup_logging(
 
 
 def main():
-    setup_logging()
-    run("example1_input.txt", "example1_output.txt")
+
+    # In this example we output to a file, since the output is very large!
+    run("long_input.txt", "long_output.txt")
 
 
 if __name__ == '__main__':
