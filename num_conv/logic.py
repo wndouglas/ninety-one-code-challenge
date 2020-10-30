@@ -143,9 +143,12 @@ class Converter:
                 temp_digits_typed += number_string
                 used_and = True
         elif number < 1000:
-            temp_digits_typed += self._recursive_converter(number % 100,
-                                                           self.__ones[number//100] +
-                                                           self.__hundred_string + " " + self.__and, 0, True)
+            mod_number = number % 100
+            appended_string = self.__ones[number//100] + self.__hundred_string
+            if mod_number != 0:
+                appended_string += " " + self.__and
+
+            temp_digits_typed += self._recursive_converter(number % 100, appended_string, 0, True)
         else:
             temp_digits_typed += \
                 self._recursive_converter(number % 1000,
