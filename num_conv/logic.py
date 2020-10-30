@@ -79,7 +79,7 @@ class Converter:
             raise ValueError("Unsupported language.")
 
         self.lang_words = lang_dict[language]
-        self.__ones, self.__teens, self.__tens, self.__higher_groups, self.__hundred_string = \
+        self.__ones, self.__teens, self.__tens, self.__higher_groups, self.__hundred_string, self.__and = \
             self._set_text_representations()
 
         self.invalid_number_string = invalid_number_string
@@ -107,9 +107,9 @@ class Converter:
         if number is None:
             return self.invalid_number_string
         else:
-            return self._recursive_converter(number, "", 0, False)
+            return self._recursive_converter(number, "", 0, False, False, number < 1000)
 
-    def _recursive_converter(self, number, digits_already_typed, thousands, used_and, add_dash=False):
+    def _recursive_converter(self, number, digits_already_typed, thousands, used_and, add_dash=False, small_num=False):
         if number == 0:
             return digits_already_typed
 
@@ -123,29 +123,32 @@ class Converter:
 
         if number < 10:
             number_string = self.__ones[number]
-            if not used_and and thousands == 0 and not add_dash:
-                temp_digits_typed += "and " + number_string
+            if not used_and and thousands == 0 and not add_dash and not small_num:
+                temp_digits_typed += self.__and + " " + number_string
             else:
                 temp_digits_typed += number_string
                 used_and = True
         elif number < 20:
             number_string = self.__teens[number - 10]
-            if not used_and and thousands == 0:
-                temp_digits_typed += "and " + number_string
+            if not used_and and thousands == 0 and not small_num:
+                temp_digits_typed += self.__and + " " + number_string
             else:
                 temp_digits_typed += number_string
                 used_and = True
         elif number < 100:
             number_string = self._recursive_converter(number % 10,  self.__tens[number//10 - 2], 0, used_and, True)
-            if not used_and and thousands == 0:
-                temp_digits_typed += "and " + number_string
+            if not used_and and thousands == 0 and not small_num:
+                temp_digits_typed += self.__and + " " + number_string
             else:
                 temp_digits_typed += number_string
                 used_and = True
         elif number < 1000:
-            temp_digits_typed += self._recursive_converter(number % 100,
-                                                           self.__ones[number//100] + self.__hundred_string + " and",
-                                                           0, True)
+            mod_number = number % 100
+            appended_string = self.__ones[number//100] + self.__hundred_string
+            if mod_number != 0:
+                appended_string += " " + self.__and
+
+            temp_digits_typed += self._recursive_converter(number % 100, appended_string, 0, True)
         else:
             temp_digits_typed += \
                 self._recursive_converter(number % 1000,
@@ -158,4 +161,4 @@ class Converter:
 
     def _set_text_representations(self):
         return tuple(self.lang_words["ones"]), tuple(self.lang_words["teens"]), tuple(self.lang_words["tens"]), \
-               tuple(self.lang_words["higher_groups"]), self.lang_words["hundred_string"]
+               tuple(self.lang_words["higher_groups"]), self.lang_words["hundred_string"], self.lang_words["and"]
