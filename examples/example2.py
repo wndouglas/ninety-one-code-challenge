@@ -21,7 +21,7 @@ def setup_logging(
 
 def main():
     setup_logging()
-    run("example_input.txt", "example_output.txt")
+    run("example2_input.txt", "example2_output.txt")
 
 
 if __name__ == '__main__':
