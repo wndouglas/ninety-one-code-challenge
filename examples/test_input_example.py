@@ -1,6 +1,6 @@
-import os
 import json
 import logging.config
+import os
 
 from num_conv.engine import run
 
@@ -20,8 +20,7 @@ def setup_logging(
 
 
 def main():
-    setup_logging()
-    run("example2_input.txt", "example2_output.txt")
+    run("test_input.txt")
 
 
 if __name__ == '__main__':

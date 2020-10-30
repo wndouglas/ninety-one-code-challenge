@@ -20,7 +20,7 @@ class TestLineParser(unittest.TestCase):
             'The database has 66723107008 records.',
             'I received 23 456,9 KGs.'
         ]
-        output_ints = [536,9121, None, 10022, 66723107008, None]
+        output_ints = [536, 9121, None, 10022, 66723107008, None]
 
         for input_string, output_int in zip(input_strings, output_ints):
             self.assertEqual(output_int, num_conv.logic.parse_line(input_string))

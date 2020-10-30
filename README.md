@@ -8,8 +8,12 @@
   - [Test cases](#Test-cases)
   - [Notes](#Notes)
   - [Evaluation criteria](#Evaluation-criteria)
-- [Design Choices](#Design-Choices)
+- [Design Choices and Assumptions](#Design-Choices-and-Assumptions)
   - [Programming Language](#programming-language)
+  - [Application type](#Application-type)
+  - [Key assumptions](#Key-assumptions)
+- [Getting Started](#Getting-Started)
+  
 
 ## Problem Specification
 ### Problem
@@ -47,6 +51,40 @@ The input will consist of lines of text containing random digits. You are expect
 
 ---
 
-## Design Choices
+## Design Choices and Assumptions
 ### Programming language
-For this problem, optimised performance is likely *not* a critical factor. The main difficulty arises from parsing text and converting this parsed text into a different output. For this problem, **Python** is particularly well suited and this is the programming language I have chosen to use. If better performance is desired, it would be possible to parallelise certain elements within the application where performance bottlenecks present themselves.
+For this problem, optimised performance is likely *not* a critical factor. The main difficulty arises from parsing text 
+and converting this parsed text into a different output. For this problem, **Python** is particularly well suited and 
+this is the programming language I have chosen to use. If better performance is desired, it would be possible to 
+parallelise certain elements within the application where performance bottlenecks present themselves.
+
+### Application type
+I have chosen to create a Python package that can be installed via Pip. A wrapper to the package allows it to be used
+as a command line application.
+
+### Key assumptions
+The key assumptions made during the design were:
+* The user only wishes to use a text file input, with each line separated by a new line.
+* In general, the user wishes to send their output to a text file. If a name is not specified then the output goes to
+standard output.
+* Numbers cannot grow larger than 999,999,999,999,999.
+* Users only wish their output to be displayed in UK English (although the groundwork for internationalisation is there)
+* Users only wish to extract one number per line (in the current implementation, subsequent numbers are ignored).
+
+---
+## Getting Started
+Getting started is easy. The top-level functionality is provided in the `runner.py` script. In the top-level directory
+`ninety-one-code-challenge`, simply run:
+
+```python runner.py --i <input-file-location> --o <output-file-location>```
+
+If you leave the output file location blank, the program defaults to outputting to STDOUT. In this case, simply run:
+
+```python runner.py --i <input-file-location>```
+
+If you would like to try out the examples (which includes the test input given in the problem spec, along with an
+example containing a large number of numbers), then I recommended you install the package `num-conv` locally in a virtual
+environment using pip. To do so, simply run the script `install.sh` (once you are finished run `uninstall.sh`) to tear
+it down. By installing locally, you may also run the tests contained in the test folder. 
+
+Please do not hesitate to reach out if you have any questions or recommendations.
