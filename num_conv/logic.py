@@ -1,8 +1,56 @@
-"""Module responsible for converting integer into its textual representation."""
+""" Module for handling the logic for parsing and converting numbers into their text representation. """
 
+import json
+import settings
 import logging
+import os
 
 logger = logging.getLogger(__name__)
+here = os.path.dirname(os.path.abspath(__file__))
+
+
+def parse_line(line):
+    """Function for parsing a number out of a line of words.
+
+    Parameters
+    ----------
+    line : string
+        A string representing a single line of input.
+
+    Returns
+    -------
+    int
+        Integer containing the output integer.
+    """
+
+    words = line.split(" ")
+    no_int_output = None
+    for index, word in enumerate(words):
+        if _represents_int(word):
+            output_integer = int(word)
+
+            # Here we check if we have a 'dodgy' number with a space in the middle followed by another number or
+            # string starting like a number
+            if index + 1 < len(words):
+                next_word = words[index + 1]
+                if _represents_int(next_word) or _represents_int(next_word[0]):
+                    logging.debug("Line contained a number in the wrong format.")
+                    return no_int_output
+
+            logging.debug("Word contained the number: {}".format(output_integer))
+            return output_integer
+
+    logging.debug("Line did not contain a valid number")
+    return no_int_output
+
+
+def _represents_int(s):
+    """Helper function to test if a string represents an integer."""
+    try:
+        int(s)
+        return True
+    except ValueError:
+        return False
 
 
 class Converter:
@@ -22,15 +70,18 @@ class Converter:
         Converts a number into its text representation
     """
 
-    SUPPORTED_LANGUAGES = 'UK'
-
     def __init__(self, language='UK', invalid_number_string="number invalid"):
-        if language not in self.SUPPORTED_LANGUAGES:
+        with open(os.path.join(here, settings.LOCALE_DIR), 'rt') as json_file:
+            lang_dict = json.load(json_file)
+
+        if language not in lang_dict:
             logging.error("Unsupported language for converter.")
             raise ValueError("Unsupported language.")
-        self.language = language
+
+        self.lang_words = lang_dict[language]
         self.__ones, self.__teens, self.__tens, self.__higher_groups, self.__hundred_string = \
             self._set_text_representations()
+
         self.invalid_number_string = invalid_number_string
 
     def convert(self, number):
@@ -106,15 +157,5 @@ class Converter:
         return temp_digits_typed + self.__higher_groups[thousands]
 
     def _set_text_representations(self):
-        if self.language is "UK":
-            ones = ("", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine")
-            teens = ("ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen",
-                     "nineteen")
-            tens = ("twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety")
-            higher_groups = ("", " thousand", " million", " billion")
-            hundred_string = " hundred"
-
-            return ones, teens, tens, higher_groups, hundred_string
-
-
-
+        return tuple(self.lang_words["ones"]), tuple(self.lang_words["teens"]), tuple(self.lang_words["tens"]), \
+               tuple(self.lang_words["higher_groups"]), self.lang_words["hundred_string"]

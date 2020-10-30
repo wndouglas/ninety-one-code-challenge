@@ -2,9 +2,8 @@ import os
 import json
 import logging.config
 
-from num_conv.input_parser import InputParser
-from num_conv.line_streamer import TxtFileLineStreamer
-from num_conv.number_to_word_converter import Converter
+from num_conv.runner import run
+
 
 def setup_logging(
     default_path='logging.json',
@@ -21,14 +20,8 @@ def setup_logging(
 
 
 def main():
-    setup_logging("blabla.json", logging.DEBUG)
-    txt_file_streamer = TxtFileLineStreamer('example_input.txt')
-    input_parser = InputParser(txt_file_streamer)
-    number_list = input_parser.get_numbers()
-    converter = Converter()
-    string_out = []
-    for num in number_list:
-        string_out.append(converter.convert(num))
+    setup_logging()
+    run("example_input.txt", "example_output.txt")
 
 
 if __name__ == '__main__':
