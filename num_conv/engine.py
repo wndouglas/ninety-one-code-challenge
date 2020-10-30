@@ -19,16 +19,12 @@ def run(input_file_location, output_file_location=None):
     logging.info("Processing input file")
 
     line = input_streamer.get_line()
-    number_list = []
     while line:
         logging.debug("Processing the word:\t{}".format(line.rstrip()))
         number_from_line = parse_line(line)
         converted_number = converter.convert(number_from_line)
 
         output_streamer.set_line(converted_number)
-        number_list.append(converted_number)
 
         # Get the next line of input
         line = input_streamer.get_line()
-
-    return number_list
