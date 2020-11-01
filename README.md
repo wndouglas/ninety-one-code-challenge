@@ -83,8 +83,19 @@ If you leave the output file location blank, the program defaults to outputting 
 ```python runner.py --i <input-file-location>```
 
 If you would like to try out the examples (which includes the test input given in the problem spec, along with an
-example containing a large number of numbers), then I recommended you install the package `num-conv` locally in a virtual
-environment using pip. To do so, simply run the script `install.sh` (once you are finished run `uninstall.sh`) to tear
-it down. By installing locally, you may also run the tests contained in the test folder. 
+example containing a large number of numbers), then I recommended navigating into the ``examples`` folder on the command
+line. Once inside this folder, you need to add the root directory to your *Python path*. To do so, run
+
+```export PYTHONPATH=".."```
+
+Once this is added to your Python path, you should be able to run
+
+```python test_input_example.py```
+
+for example.
+
+To run the test suite, navigate back to the top level directory and run
+
+```python unittest```
 
 Please do not hesitate to reach out if you have any questions or recommendations.

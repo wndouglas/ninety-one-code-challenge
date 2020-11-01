@@ -1,1 +1,0 @@
-pip uninstall num-conv
