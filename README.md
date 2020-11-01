@@ -96,6 +96,6 @@ for example.
 
 To run the test suite, navigate back to the top level directory and run
 
-```python unittest```
+```python -m unittest```
 
 Please do not hesitate to reach out if you have any questions or recommendations.
