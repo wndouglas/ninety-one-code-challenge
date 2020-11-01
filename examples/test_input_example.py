@@ -1,8 +1,7 @@
+from num_conv.engine import run
 import json
 import logging.config
 import os
-
-from num_conv.engine import run
 
 
 def setup_logging(
