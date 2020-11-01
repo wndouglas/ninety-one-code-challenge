@@ -62,14 +62,16 @@ class TxtFileInputStreamer(InputStreamer):
         try:
             self._txt_file = open(file_location, 'r', encoding='utf-8-sig')
         except FileNotFoundError:
-            logging.error("incorrect file path", exc_info=True)
+            logging.error("incorrect file path")
+            self._txt_file = None
             raise
 
         logging.info("Txt input streamer opened file at location: {}.".format(file_location))
 
     def __del__(self):
-        self._txt_file.close()
-        logging.info("Txt input streamer closed file at location: {}.".format(self.file_location))
+        if self._txt_file is not None:
+            self._txt_file.close()
+            logging.info("Txt input streamer closed file at location: {}.".format(self.file_location))
 
     def get_line(self):
         """
