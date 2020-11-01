@@ -102,11 +102,16 @@ class Converter:
         ValueError
             If a negative integer is passed, throws a value error.
         """
-        # The easiest way to convert involves recursively calling the below function. Here we call it with the initial
-        # parameter values.
         if number is None:
             return self.invalid_number_string
+        elif number < 0:
+            raise ValueError("Conversion accepts non-negative values only.")
         else:
+            # The conversion involves recursively calling the function below. Here we call it with the initial
+            # parameter values. The flag 'used_and' ensures that numbers such as 'three thousand AND 'two' get the 'and'
+            # at the right time. The 'add_dash' flag is to ensure numbers like 'ninety-one' get the dash at the correct
+            # time and the 'small_num' flag is there to ensure that numbers less than 1000 such as 31 don't get an and
+            # at the front.
             return self._recursive_converter(number, "", 0, False, False, number < 1000)
 
     def _recursive_converter(self, number, digits_already_typed, thousands, used_and, add_dash=False, small_num=False):
@@ -121,23 +126,27 @@ class Converter:
             else:
                 temp_digits_typed += " "
 
+        include_and = not used_and and thousands == 0 and not small_num
+
         if number < 10:
             number_string = self.__ones[number]
-            if not used_and and thousands == 0 and not add_dash and not small_num:
+            if include_and and not add_dash:
                 temp_digits_typed += self.__and + " " + number_string
             else:
+                # Here, we don't want to include an 'and' or we want to add a dash. Examples could be
+                # either a small number like 7 or a number with a tens digit before hand like 38
                 temp_digits_typed += number_string
                 used_and = True
         elif number < 20:
             number_string = self.__teens[number - 10]
-            if not used_and and thousands == 0 and not small_num:
+            if include_and:
                 temp_digits_typed += self.__and + " " + number_string
             else:
                 temp_digits_typed += number_string
                 used_and = True
         elif number < 100:
             number_string = self._recursive_converter(number % 10,  self.__tens[number//10 - 2], 0, used_and, True)
-            if not used_and and thousands == 0 and not small_num:
+            if include_and:
                 temp_digits_typed += self.__and + " " + number_string
             else:
                 temp_digits_typed += number_string
@@ -150,6 +159,9 @@ class Converter:
 
             temp_digits_typed += self._recursive_converter(number % 100, appended_string, 0, True)
         else:
+            # If we have a number larger than a thousand, we can split the number into it's first three digits, along
+            # with its subsequent digits. For example: 500,654 is the same as 654 but with a five hundred thousand
+            # component tacked on the front.
             temp_digits_typed += \
                 self._recursive_converter(number % 1000,
                                           self._recursive_converter(number//1000, "",

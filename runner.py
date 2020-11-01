@@ -1,5 +1,9 @@
 import argparse
 from num_conv.engine import run
+import logging
+
+logger = logging.getLogger()
+logger.disabled = True
 
 
 def main():
@@ -20,7 +24,7 @@ def main():
     try:
         run(input_file, output_file)
     except FileNotFoundError:
-        print("Incorrect file path provided")
+        print("Invalid file path provided.")
 
 
 if __name__ == "__main__":
