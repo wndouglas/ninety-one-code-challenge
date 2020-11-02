@@ -71,6 +71,14 @@ standard output.
 * Users only wish their output to be displayed in UK English (although the groundwork for internationalisation is there)
 * Users only wish to extract one number per line (in the current implementation, subsequent numbers are ignored).
 
+### Accepted input/output formats
+#### Inputs
+Inputs are expected to be given in a simple txt file. Each sentence within the file should be separated with a new line.
+
+#### Outputs
+Outputs can either be written straight into a txt file by specifying a file path, or will be printed to the console if no
+file path is given.
+
 ---
 ## Getting Started
 Getting started is easy. The top-level functionality is provided in the `runner.py` script. In the top-level directory
