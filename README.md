@@ -12,7 +12,7 @@
   - [Programming Language](#programming-language)
   - [Application type](#Application-type)
   - [Key assumptions](#Key-assumptions)
-  - [Accepted input/output formats](#Accepted-input/output-formats)
+  - [Accepted input/output formats](#Accepted-input-/-output-formats)
 - [Getting Started](#Getting-Started)
   
 
