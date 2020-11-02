@@ -1,3 +1,5 @@
+import sys
+sys.path.insert(0, "..")
 from num_conv.engine import run
 import json
 import logging.config
@@ -19,6 +21,7 @@ def setup_logging(
 
 
 def main():
+    # setup_logging() # uncomment this function to add logging
     run("test_input.txt")
 
 
