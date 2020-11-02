@@ -1,7 +1,8 @@
+import sys
+sys.path.insert(0, "..")
 import os
 import json
 import logging.config
-
 from num_conv.engine import run
 
 
@@ -21,8 +22,8 @@ def setup_logging(
 
 def main():
 
-    # In this example we output to a file, since the output is very large!
-    run("long_input.txt", "long_output.txt")
+    # setup_logging() # uncomment this function to add logging
+    run("long_input.txt", "long_output.txt") # outputs to file
 
 
 if __name__ == '__main__':
