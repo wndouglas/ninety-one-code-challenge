@@ -83,16 +83,12 @@ If you leave the output file location blank, the program defaults to outputting 
 ```python runner.py --i <input-file-location>```
 
 If you would like to try out the examples (which includes the test input given in the problem spec, along with an
-example containing a large number of numbers), then I recommended navigating into the ``examples`` folder on the command
-line. Once inside this folder, you need to add the root directory to your *Python path*. To do so, run
+example containing a large number of numbers), navigate into the ``examples`` folder on the command
+line. Once inside this folder, simply run 
 
-```export PYTHONPATH=".."```
+```python <example_name.py>```
 
-Once this is added to your Python path, you should be able to run
-
-```python test_input_example.py```
-
-for example.
+For example, ``python test_input_example.py``.
 
 To run the test suite, navigate back to the top level directory and run
 
